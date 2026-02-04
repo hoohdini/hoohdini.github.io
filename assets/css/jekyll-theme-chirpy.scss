@@ -1,0 +1,22 @@
+---
+---
+
+/* prettier-ignore */
+@use 'main
+{%- if jekyll.environment == 'production' -%}
+  .bundle
+{%- endif -%}
+';
+
+/* append your custom style below */
+:root {
+  /* 사이드바 배경색 변경 예시 */
+  --sidebar-bg: #212529; 
+  /* 강조 색상(링크 등) 변경 예시 */
+  --link-color: #007bff;
+}
+
+/* 포스트 제목 글자 크기를 키우고 싶다면 */
+h1 {
+  font-weight: 800;
+}
