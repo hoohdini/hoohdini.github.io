@@ -32,6 +32,7 @@ collections:
     view_filters:
       - { label: 논문 리뷰, field: categories, pattern: 논문 리뷰 }
       - { label: 프로젝트, field: categories, pattern: 프로젝트 }
+      - { label: 학습 노트, field: categories, pattern: 학습 노트 }
     fields:
       - { name: title, label: 제목, widget: string }
       - name: date
@@ -39,11 +40,30 @@ collections:
         widget: datetime
         default: "{{now}}"
         format: "YYYY-MM-DD HH:mm:ss ZZ"
+      # Chirpy는 첫 번째 값을 큰 분류, 두 번째 값을 세부 분류로 씁니다
       - name: categories
         label: 카테고리
+        label_singular: 분류
         widget: list
-        required: false
-        hint: "쉼표로 구분. 최대 2단계 (예: 논문 리뷰, RecSys)"
+        min: 1
+        max: 2
+        hint: "첫 칸에 큰 분류, (선택) 둘째 칸에 세부 분류를 고르세요. 예: 프로젝트 → 인턴"
+        field:
+          name: category
+          label: 분류
+          widget: select
+          options:
+            - { label: "① 큰 분류 · 논문 리뷰", value: 논문 리뷰 }
+            - { label: "① 큰 분류 · 프로젝트", value: 프로젝트 }
+            - { label: "① 큰 분류 · 학습 노트", value: 학습 노트 }
+            - { label: "② 프로젝트 › 인턴", value: 인턴 }
+            - { label: "② 프로젝트 › 연구", value: 연구 }
+            - { label: "② 프로젝트 › 사이드", value: 사이드 }
+            - { label: "② 프로젝트 › 공모전", value: 공모전 }
+            - { label: "② 논문 리뷰 › 학회 스터디", value: 학회 스터디 }
+            - { label: "② 논문 리뷰 › 개인", value: 개인 }
+            - { label: "② 학습 노트 › DSL 세션", value: DSL 세션 }
+            - { label: "② 학습 노트 › 딥러닝", value: 딥러닝 }
       - name: tags
         label: 태그
         widget: list
