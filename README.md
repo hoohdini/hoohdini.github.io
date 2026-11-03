@@ -1,3 +1,27 @@
+# HOOHDINI 블로그
+
+Jekyll + [Chirpy](https://github.com/cotes2020/jekyll-theme-chirpy) 테마. `main`에 push하면 GitHub Actions가 GitHub Pages로 배포합니다.
+
+## 글쓰기 (브라우저에서)
+
+1. https://hoohdini.github.io/admin/ 에 들어갑니다.
+2. **Sign In Using Access Token**을 누르고 GitHub 토큰을 붙여넣습니다. (토큰 만드는 법은 아래)
+3. **글 → 새 글**에서 제목·카테고리·태그를 채우고 본문을 씁니다. 이미지는 본문에 붙여넣거나 끌어다 놓으면 `assets/img/posts/`에 올라갑니다.
+4. **저장**을 누르면 `main`에 커밋되고, 1~2분 뒤 사이트에 반영됩니다.
+
+- 수식(`$...$`)이 들어간 글은 본문 툴바에서 **Markdown 모드**로 바꿔서 편집하세요. 서식 모드는 수식 기호를 이스케이프할 수 있습니다.
+- 임시 저장만 하고 싶으면 **공개**를 끄고 저장합니다(`published: false`).
+
+### 토큰 만들기 (한 번만)
+
+GitHub → Settings → Developer settings → Personal access tokens → **Fine-grained tokens** → Generate new token
+
+- Repository access: **Only select repositories** → `hoohdini.github.io`
+- Permissions → Repository permissions → **Contents: Read and write**
+- 만료일은 원하는 대로(예: 1년). 토큰은 이 브라우저에만 저장됩니다. 공용 PC에서는 쓰지 마세요.
+
+---
+
 # Chirpy Starter
 
 [![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy)][gem]&nbsp;

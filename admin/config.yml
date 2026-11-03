@@ -1,0 +1,76 @@
+# Sveltia CMS 설정 — https://hoohdini.github.io/admin/ 에서 글을 쓰고 저장하면 main 브랜치에 커밋되고,
+# GitHub Actions가 자동으로 사이트를 다시 배포합니다(1~2분).
+
+backend:
+  name: github
+  repo: hoohdini/hoohdini.github.io
+  branch: main
+  commit_messages:
+    create: "글 추가: {{slug}}"
+    update: "글 수정: {{slug}}"
+    delete: "글 삭제: {{slug}}"
+    uploadMedia: "이미지 업로드: {{path}}"
+    deleteMedia: "이미지 삭제: {{path}}"
+
+site_url: https://hoohdini.github.io
+display_url: https://hoohdini.github.io
+
+# 붙여넣거나 끌어다 놓은 이미지가 저장되는 곳
+media_folder: assets/img/posts
+public_folder: /assets/img/posts
+
+collections:
+  - name: posts
+    label: 글
+    label_singular: 글
+    folder: _posts
+    create: true
+    # Jekyll은 YYYY-MM-DD-제목.md 형식의 파일만 글로 인식합니다
+    slug: "{{date | date('YYYY-MM-DD')}}-{{slug}}"
+    summary: "{{title}} · {{date | date('YYYY.MM.DD')}}"
+    sortable_fields: [date, title]
+    view_filters:
+      - { label: 논문 리뷰, field: categories, pattern: 논문 리뷰 }
+      - { label: 프로젝트, field: categories, pattern: 프로젝트 }
+    fields:
+      - { name: title, label: 제목, widget: string }
+      - name: date
+        label: 날짜
+        widget: datetime
+        default: "{{now}}"
+        format: "YYYY-MM-DD HH:mm:ss ZZ"
+      - name: categories
+        label: 카테고리
+        widget: list
+        required: false
+        hint: "쉼표로 구분. 최대 2단계 (예: 논문 리뷰, RecSys)"
+      - name: tags
+        label: 태그
+        widget: list
+        required: false
+        hint: "쉼표로 구분 (예: deep learning, recommendation)"
+      - name: description
+        label: 요약
+        widget: text
+        required: false
+        hint: "목록과 검색 결과에 보이는 한두 문장. 비워두면 본문 앞부분이 쓰입니다."
+      - name: image
+        label: 대표 이미지
+        widget: image
+        required: false
+      - name: math
+        label: 수식 사용
+        widget: boolean
+        default: false
+        hint: "$...$ 수식을 쓰는 글이면 켜세요"
+      - name: published
+        label: 공개
+        widget: boolean
+        default: true
+        hint: "끄면 저장은 되지만 사이트에는 나오지 않습니다 (임시 저장용)"
+      - name: body
+        label: 본문
+        widget: markdown
+        # 수식($...$)이나 Chirpy 전용 문법({: .prompt-tip })이 있는 글은 툴바에서 Markdown 모드로 바꿔서 편집하세요
+        modes: [rich_text, raw]
+        editor_components: [code-block, image, table]
