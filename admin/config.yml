@@ -15,6 +15,10 @@ backend:
 site_url: https://hoohdini.github.io
 display_url: https://hoohdini.github.io
 
+# 비워둔 선택 항목(요약, 대표 이미지 등)은 파일에 쓰지 않음 — 빈 image: '' 가 빌드 검사를 실패시킴
+output:
+  omit_empty_optional_fields: true
+
 # 붙여넣거나 끌어다 놓은 이미지가 저장되는 곳
 media_folder: assets/img/posts
 public_folder: /assets/img/posts
